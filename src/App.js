@@ -4,19 +4,22 @@ import contactList from './contacts.json';
 import React, { useState } from 'react';
 
 function App() {
-  const [contacts, setContacts] = useState([...contactList].slice(0, 5));
+  const [contacts, setContacts] = useState(contactList.slice(0, 5));
+
   const randomContact = () => {
     const randomCelebrity = contactList[Math.floor(Math.random() * contactList.length)]
     setContacts([randomCelebrity, ...contacts])
   }
   const sortByName = () => {
-    const sortedByName = contacts.sort(function (a, b) { return a.name.localeCompare(b.name) })
-    setContacts([...sortedByName])
+    const sortedByName = [...contacts]
+    sortedByName.sort(function (a, b) { return a.name.localeCompare(b.name) })
+    setContacts(sortedByName)
   }
 
   const sortByPopularity = () => {
-    const sortedByPopularity = contacts.sort(function (a, b) { return a.popularity -  b.popularity })
-    setContacts([...sortedByPopularity])
+    const sortedByPopularity= [...contacts]
+    sortedByPopularity.sort(function (a, b) { return a.popularity -  b.popularity })
+    setContacts(sortedByPopularity)
   }
 
   const removeContact = (contactId) => {
@@ -24,7 +27,7 @@ function App() {
         return contact.id !== contactId;
       });
    
-      setContacts([...removedContacts]);
+      setContacts(removedContacts);
     };
    
   return (
